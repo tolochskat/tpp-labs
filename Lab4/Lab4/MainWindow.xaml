@@ -1,0 +1,59 @@
+﻿<Window x:Class="GuessNumberGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Угадай число" Height="350" Width="400" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Background="#FFE6E6">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <Label Grid.Row="0" Content="Угадай число!" 
+               HorizontalAlignment="Center" 
+               FontSize="24" FontWeight="Bold" Margin="0,20"
+               Foreground="#8B4513"/>
+
+        <!-- Инструкция -->
+        <Label Grid.Row="1" Content="Загадано число от 1 до 100. Попробуй угадать!" 
+               HorizontalAlignment="Center"
+               Foreground="#8B4513" FontWeight="Bold"/>
+
+        <!-- Поле ввода -->
+        <TextBox Grid.Row="2" x:Name="NumberInput" 
+                 HorizontalAlignment="Center" Width="100" 
+                 TextAlignment="Center" FontSize="16"
+                 Background="#FFF9F0" BorderBrush="#FFC0A4" Foreground="#8B4513"/>
+
+        <!-- Кнопка проверки -->
+        <Button Grid.Row="3" Content="Проверить" 
+                HorizontalAlignment="Center" 
+                Background="#FFF9F0" BorderBrush="#FFC0A4" Foreground="#8B4513"
+                FontWeight="Bold" Padding="10,5" Margin="5"
+                Click="CheckGuess_Click"/>
+
+        <!-- Подсказка -->
+        <Label Grid.Row="4" x:Name="HintLabel" 
+               HorizontalAlignment="Center" FontSize="14"
+               Foreground="#8B4513" FontWeight="Bold"/>
+
+        <!-- Счетчик попыток -->
+        <Label Grid.Row="5" x:Name="AttemptsLabel" 
+               HorizontalAlignment="Center" FontSize="14"
+               Foreground="#8B4513" FontWeight="Bold"/>
+
+        <!-- Кнопка новой игры -->
+        <Button Grid.Row="6" Content="Новая игра" 
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"
+                Background="#FFF9F0" BorderBrush="#FFC0A4" Foreground="#8B4513"
+                FontWeight="Bold" Padding="10,5"
+                Click="NewGame_Click"/>
+    </Grid>
+</Window>
