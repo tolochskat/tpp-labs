@@ -1,0 +1,88 @@
+﻿<Window x:Class="NotesApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NotesApp"
+        mc:Ignorable="d"
+        Title="Мои заметки" Height="450" Width="600" Closing="Window_Closing">
+    <!-- Ресурсы окна - стили для элементов управления -->
+    <Window.Resources>
+        <!-- Стиль для кнопок -->
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#FFFDE7"/>
+            <Setter Property="BorderBrush" Value="#FFD54F"/>
+        </Style>
+
+        <!-- Стиль для текстовых полей -->
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#FFF9C4"/>
+            <Setter Property="BorderBrush" Value="#FFD54F"/>
+        </Style>
+
+        <!-- Стиль для списка заметок -->
+        <Style TargetType="ListBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#FFF9C4"/>
+            <Setter Property="BorderBrush" Value="#FFD54F"/>
+        </Style>
+
+        <!-- Стиль для меток -->
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="#5D4037"/>
+        </Style>
+    </Window.Resources>
+
+    <!-- Основной контейнер с светло-желтым фоном -->
+    <Grid Background="#FFF8E1" Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Строка для поиска -->
+            <RowDefinition Height="*"/>
+            <!-- Основная область -->
+            <RowDefinition Height="Auto"/>
+            <!-- Строка кнопок -->
+        </Grid.RowDefinitions>
+
+        <!-- Панель поиска -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <Label Content="Поиск:" VerticalAlignment="Center"/>
+            <TextBox x:Name="searchTextBox" Width="200" TextChanged="searchTextBox_TextChanged"/>
+        </StackPanel>
+
+        <!-- Основная область с заметками -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <!-- Список заметок -->
+                <ColumnDefinition Width="2*"/>
+                <!-- Поле редактирования -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Список заметок -->
+            <StackPanel Grid.Column="0">
+                <Label Content="Мои заметки:"/>
+                <ListBox x:Name="notesListBox" Height="250" SelectionChanged="notesListBox_SelectionChanged"/>
+            </StackPanel>
+
+            <!-- Поле редактирования заметки -->
+            <StackPanel Grid.Column="1">
+                <Label Content="Текст заметки:"/>
+                <TextBox x:Name="noteTextBox" Height="200" TextWrapping="Wrap" 
+                         AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Панель кнопок управления -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="addButton" Content="Добавить" Click="addButton_Click"/>
+            <Button x:Name="saveButton" Content="Сохранить" Click="saveButton_Click"/>
+            <Button x:Name="deleteButton" Content="Удалить" Click="deleteButton_Click"/>
+            <Button x:Name="colorButton" Content="Цвет поля" Margin="20,5,5,5" Click="colorButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
