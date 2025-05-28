@@ -1,0 +1,167 @@
+﻿<Window x:Class="CustomButtonLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomButtonLab"
+        mc:Ignorable="d"
+        Title="Custom Button Template" Height="350" Width="500">
+
+    <Window.Resources>
+        <!-- Стиль для первой кнопки с плавным изменением цвета при наведении -->
+        <Style x:Key="HoverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF4285F4"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="12 6"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="4"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                            <ContentPresenter x:Name="contentPresenter"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            RecognizesAccessKey="True"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Плавное изменение цвета при наведении -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#FF3367D6" 
+                                                          Duration="0:0:0.2"
+                                                          Storyboard.TargetProperty="Background.Color"
+                                                          Storyboard.TargetName="border"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#FF4285F4" 
+                                                          Duration="0:0:0.2"
+                                                          Storyboard.TargetProperty="Background.Color"
+                                                          Storyboard.TargetName="border"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#FFBDBDBD"/>
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#FF6E6E6E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для второй кнопки с изменением цвета при нажатии -->
+        <Style x:Key="PressButtonStyle" TargetType="Button" BasedOn="{StaticResource HoverButtonStyle}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="4"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                RenderTransformOrigin="0.5,0.5">
+                            <Border.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                </TransformGroup>
+                            </Border.RenderTransform>
+                            <ContentPresenter x:Name="contentPresenter"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            RecognizesAccessKey="True"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Плавное изменение цвета при нажатии -->
+                            <Trigger Property="IsPressed" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#FF2A56B0" 
+                                                          Duration="0:0:0.1"
+                                                          Storyboard.TargetProperty="Background.Color"
+                                                          Storyboard.TargetName="border"/>
+                                            <DoubleAnimation To="0.95" 
+                                                           Duration="0:0:0.1"
+                                                           Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                                                           Storyboard.TargetName="border"/>
+                                            <DoubleAnimation To="0.95" 
+                                                           Duration="0:0:0.1"
+                                                           Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                                                           Storyboard.TargetName="border"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation To="#FF4285F4" 
+                                                          Duration="0:0:0.2"
+                                                          Storyboard.TargetProperty="Background.Color"
+                                                          Storyboard.TargetName="border"/>
+                                            <DoubleAnimation To="1.0" 
+                                                           Duration="0:0:0.2"
+                                                           Storyboard.TargetProperty="RenderTransform.Children[0].ScaleX"
+                                                           Storyboard.TargetName="border"/>
+                                            <DoubleAnimation To="1.0" 
+                                                           Duration="0:0:0.2"
+                                                           Storyboard.TargetProperty="RenderTransform.Children[0].ScaleY"
+                                                           Storyboard.TargetName="border"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="border" Property="Background" Value="#FFBDBDBD"/>
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#FF6E6E6E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+            <!-- Кнопка с плавным изменением цвета при наведении -->
+            <Button Style="{StaticResource HoverButtonStyle}" 
+                    Content="Наведи на меня" 
+                    Margin="0 10"/>
+
+            <!-- Кнопка с изменением цвета при нажатии -->
+            <Button Style="{StaticResource PressButtonStyle}" 
+                    Content="Нажми меня" 
+                    Margin="0 10"/>
+
+            <!-- Отключенная кнопка -->
+            <Button Style="{StaticResource HoverButtonStyle}" 
+                    Content="Отключенная кнопка" 
+                    IsEnabled="False"
+                    Margin="0 10"/>
+        </StackPanel>
+    </Grid>
+</Window>
