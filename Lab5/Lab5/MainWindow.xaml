@@ -1,0 +1,55 @@
+﻿<Window x:Class="GreenNotepad.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Блокнот" Height="450" Width="600">
+    <Window.Resources>
+        <!-- цветовая палитра -->
+        <SolidColorBrush x:Key="PrimaryGreen" Color="#FF2E8B57"/>
+        <SolidColorBrush x:Key="LightGreen" Color="#FF90EE90"/>
+        <SolidColorBrush x:Key="DarkGreen" Color="#FF006400"/>
+        <SolidColorBrush x:Key="BackgroundGreen" Color="#FFF0FFF0"/>
+
+        <!-- Стили для элементов -->
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="{StaticResource PrimaryGreen}"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style TargetType="MenuItem">
+            <Setter Property="Background" Value="{StaticResource PrimaryGreen}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource LightGreen}"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource BackgroundGreen}"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkGreen}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource LightGreen}"/>
+            <Setter Property="Foreground" Value="{StaticResource DarkGreen}"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel>
+        <!-- Меню -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Новый" Command="New" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="Открыть..." Command="Open" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="Сохранить" Command="Save" InputGestureText="Ctrl+S"/>
+                <Separator/>
+                <MenuItem Header="Выход" Command="Close"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Текстовая область -->
+        <TextBox Name="TextArea" AcceptsReturn="True" TextWrapping="Wrap"/>
+    </DockPanel>
+</Window>
